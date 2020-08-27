@@ -15,4 +15,9 @@ profiles.clj
 /node_modules
 /log
 
+log/
+target/
+
 .idea
+*db.mv.db
+*db.trace.db
