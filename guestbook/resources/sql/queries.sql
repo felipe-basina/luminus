@@ -7,3 +7,7 @@ VALUES (:name, :message, :timestamp)
 -- :name get-messages :? :*
 -- :doc selects all available messages
 SELECT * FROM guestbook
+
+-- :name delete-messages
+-- :doc delete all available messages
+DELETE FROM guestbook
