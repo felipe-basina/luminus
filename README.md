@@ -21,6 +21,20 @@ To start a web server for the application, run:
 To run migrations:
 
     lein run migrate     
+    
+## Tests
+
+To run all tests
+
+    lein run :all
+    
+To run tests from specific namespace
+
+    lein run my.namespace.file (switch from "_" to "-" on the file name)
+    
+To run specific test case from specific namespace
+
+    lein run :only my.namespace.file/my-test-case
 
 ## License
 
