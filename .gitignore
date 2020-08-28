@@ -21,3 +21,4 @@ target/
 .idea
 *db.mv.db
 *db.trace.db
+.lein-failures
