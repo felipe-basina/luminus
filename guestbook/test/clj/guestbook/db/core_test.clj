@@ -48,3 +48,21 @@
                (is (= 1
                      (-> (db/get-messages t-conn {})
                          (count)))))))
+
+(deftest delete-message-by-id
+         (jdbc/with-transaction [t-conn *db*]
+          (db/delete-messages t-conn {})
+          (let [timestamp (java.time.LocalDateTime/now)
+                new-message(db/save-message!
+                             t-conn
+                             {:name "Bob"
+                              :message "Hello, World"
+                              :timestamp timestamp}
+                             {:connection t-conn})]
+               (is (= 1
+                      (-> (db/get-messages t-conn {} {:connection t-conn})
+                          (count))))
+               (db/delete-by-id! t-conn (assoc {} :id new-message) {:connection t-conn})
+               (is (= 0
+                      (-> (db/get-messages t-conn {})
+                          (count)))))))
