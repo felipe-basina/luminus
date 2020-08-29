@@ -13,5 +13,5 @@ SELECT * FROM guestbook
 DELETE FROM guestbook
 
 -- :name delete-by-id! :! :n
--- :doc delete by message
+-- :doc delete by id
 DELETE FROM guestbook WHERE id = :id
