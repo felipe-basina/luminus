@@ -23,6 +23,10 @@
                 (db/save-message! (assoc params :timestamp (java.util.Date.)))
                 (response/found "/"))))
 
+(defn delete-message [params]
+      (db/delete-by-id! (assoc {} :id (:id (:path-params params))))
+      {:messages (db/get-messages)})
+
 (defn home-page [{:keys [flash] :as request}]
   (layout/render request "home.html" (merge {:messages (db/get-messages)}
                                             (select-keys flash [:name :message :errors]))))
@@ -30,11 +34,12 @@
 (defn about-page [request]
   (layout/render request "about.html"))
 
+;middleware/wrap-csrf
 (defn home-routes []
   [""
-   {:middleware [middleware/wrap-csrf
-                 middleware/wrap-formats]}
+   {:middleware [middleware/wrap-formats]}
    ["/" {:get home-page
          :post save-message!}]
+   ["/message/:id" {:delete delete-message}]
    ["/about" {:get about-page}]])
 
